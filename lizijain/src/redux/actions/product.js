@@ -1,0 +1,1 @@
+export const Saveproduct = value=>({type:'saveprod',data:value})

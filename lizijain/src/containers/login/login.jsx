@@ -1,14 +1,30 @@
 import React, { Component } from 'react'
-import {Form,Input,Button} from 'antd'
+import {Form,Input,Button,message} from 'antd'
 import {UserOutlined,LockOutlined} from '@ant-design/icons'
 import './login.less'
 import logo from './img/logo.jpg'
+import {connect} from 'react-redux'
+import {login} from '../../redux/actions/login'
+import {reqLogin} from '../../api/index'
+import {Redirect} from 'react-router-dom'
 const {Item} = Form;
-export default  class Login extends Component{
-    onFinish = values => {
-        console.log(values);
+@connect(state=>({...state}),{
+    login
+})
+class Login extends Component{
+    onFinish = async values => {
+        let result = await reqLogin(values,message);
+        if(result.state){
+            message.error(result.mes)
+        }else{
+            this.props.login(result)
+            this.props.history.replace('/admin')
+        }
     };
     render() {
+        if(this.props.logindata.isLogin){
+           return <Redirect to="/admin"></Redirect>
+        }
         return (
             <div className="login">
                 <header>
@@ -38,7 +54,7 @@ export default  class Login extends Component{
                             }else if(value.length>12){
                                 // callback('太长了')
                                return Promise.reject('太长了')
-                            }else if(!/^\w+$/.test(value)){
+                            }else if(!/^[0-9]+$/.test(value)){
                                 // callback('你觉得你输的那些符号能往这里输吗')
                                return Promise.reject('你觉得你输的那些符号能往这里输吗')
                             }
@@ -62,3 +78,4 @@ export default  class Login extends Component{
         )
     }
 }
+export default Login

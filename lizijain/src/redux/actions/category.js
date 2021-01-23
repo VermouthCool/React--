@@ -1,0 +1,1 @@
+export const Savecategory =(data)=>({type:'savecate',data})

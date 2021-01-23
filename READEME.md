@@ -6,3 +6,5 @@
     3.安装react路由 react-router-dom
     4.安装 npm install --save @ant-design/icons antd现在没有内置的图标了
     组件的本质是函数
+    5.安装npm i @babel/plugin-proposal-decorators 更改override。js
+    6.安装screenfull

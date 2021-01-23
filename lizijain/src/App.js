@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Route,Switch} from 'react-router-dom'
-import Admin from './pages/admin/admin.jsx'
-import Login from './pages/login/login.jsx'
+import {Route,Switch,Redirect} from 'react-router-dom'
+import Admin from './containers/admin/admin.jsx'
+import Login from './containers/login/login.jsx'
 export default class App extends Component{
   render() {
     return (
@@ -10,6 +10,7 @@ export default class App extends Component{
          {/* <Route path='/login' component={Login}></Route> */}
          <Route path='/login' component={Login}></Route>
          <Route path="/admin" component={Admin}></Route>
+         <Redirect to="/admin"></Redirect>
        </Switch>
       </div>
     )
